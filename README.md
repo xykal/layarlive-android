@@ -24,7 +24,7 @@ Spesifikasi resmi Xiaomi mencantumkan Android 12 (Go Edition), Micro-USB, dan ja
 
 ## Build release melalui GitHub Actions
 
-Workflow ada di `.github/workflows/android-release.yml`:
+Repo publik: [xykal/layarlive-android](https://github.com/xykal/layarlive-android). Workflow ada di `.github/workflows/android-release.yml`. Belum ada Actions Release yang dijalankan karena signing secrets belum dipasang.
 
 - `workflow_dispatch` meminta versi seperti `v0.2.1`, membangun APK release signed, lalu menerbitkannya sebagai GitHub Release.
 - Push tag `v*` melakukan hal yang sama untuk tag tersebut.
@@ -57,12 +57,12 @@ Di GitHub repository, buka **Settings → Secrets and variables → Actions → 
 3. `ANDROID_KEY_ALIAS` — contoh `layarlive`.
 4. `ANDROID_KEY_PASSWORD` — password key alias.
 
-Setelah source project dan workflow berada di branch utama:
+Setelah memasang keempat secret di atas:
 
-1. Jalankan workflow dari tab **Actions** untuk mendapat artifact APK.
-2. Untuk link rilis publik, push tag versi, misalnya `v0.2.0`; workflow akan membuat GitHub Release.
+1. Dari tab **Actions**, jalankan workflow dan masukkan versi baru (contoh `v0.2.1`), atau
+2. Push tag versi baru dengan pola `v*`; workflow akan membangun APK signed dan memasangnya sebagai GitHub Release asset.
 
-> GitHub integration tidak tersedia di sesi ini, jadi file workflow sudah disiapkan tetapi belum bisa ku-push atau jalankan pada repo kamu. Upload source project ini ke repo GitHub milikmu dan masukkan secrets langsung di GitHub—jangan kirim kunci ke chat.
+Workflow tidak mengunggah Actions artifact. Repo saat ini tidak memiliki collaborator tambahan; Actions dibatasi ke daftar action yang dipakai project, default `GITHUB_TOKEN` read-only, dan job release mendapat `contents: write` hanya untuk menerbitkan asset. Jangan masukkan file `env.txt`/`.env` atau secret lain ke repo publik.
 
 ## Build lokal (opsional)
 
